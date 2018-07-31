@@ -10,7 +10,7 @@
     <div class="clock">
       <div class="clock-face">
         <div class="hand hour-hand"></div>
-        <div class="hand min-hand"></div>
+        <div class="hand minute-hand"></div>
         <div class="hand second-hand"></div>
       </div>
     </div>
@@ -71,14 +71,31 @@
   </style>
 
   <script>
+      const secondHand = document.querySelector('.second-hand');
+      const hoursHand = document.querySelector('.hour-hand');
+      const minutesHand = document.querySelector('.minute-hand');
+
+      // set current time and animate clock
       function setDate() {
           const now = new Date();
+          const hours = now.getHours();
+          const minutes = now.getMinutes();
           const seconds = now.getSeconds();
-          const secondsDegrees = (seconds / 60 ) * 360;
-          console.log(seconds);
-      }
-
+          // set rotation degrees for clock hands
+          const hoursDegrees = ((hours / 12) * 360) + 90;
+          const minutesDegrees = ((minutes / 60 ) * 360) + 90;
+          const secondsDegrees = ((seconds / 60 ) * 360) + 90;
+          // end set rotation degrees for clock hands
+          // animate hands to updated degrees
+          hoursHand.style.transform = `rotate(${hoursDegrees}deg)`;
+          minutesHand.style.transform = `rotate(${minutesDegrees}deg)`;
+          secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+          // end animate hands to updated degrees
+      } // end set current time and animate clock
+      
+      // update the DOM every second
       setInterval(setDate, 1000);
+      // end update the DOM every second
 
   </script>
 </body>
